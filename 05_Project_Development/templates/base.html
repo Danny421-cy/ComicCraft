@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ComicCraft — AI Comic Story Creator{% endblock %}</title>
+    <!-- Google Fonts: Bangers & Comic Neue & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="comic-body">
+
+    <!-- Top Comic Navigation Bar -->
+    <header class="comic-navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <span class="burst-icon">💥</span>
+                <span class="brand-text">COMIC<span class="highlight">CRAFT</span></span>
+                <span class="brand-tag">AI CREATOR</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/" class="nav-link">🎨 Create Story</a>
+                <a href="/test-image" class="nav-link">⚡ Test Image AI</a>
+                <a href="/docs" target="_blank" class="nav-link api-badge">📖 API Docs</a>
+            </nav>
+            <div class="api-status-pills">
+                <span class="status-pill {% if has_gemini %}active{% else %}offline{% endif %}" title="Google Gemini Dual-LLM Status">
+                    Gemini: {% if has_gemini %}READY 🟢{% else %}FALLBACK 🟡{% endif %}
+                </span>
+                <span class="status-pill {% if has_hf %}active{% else %}offline{% endif %}" title="Hugging Face Diffusion Status">
+                    HF Diffusion: {% if has_hf %}READY 🟢{% else %}FALLBACK 🟡{% endif %}
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="main-wrapper">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Comic Footer -->
+    <footer class="comic-footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                <strong>ComicCraft</strong> — Powered by <em>Google Gemini 1.5</em>, <em>Hugging Face Diffusion</em> & <em>FPDF2</em>.
+            </p>
+            <p class="footer-subtext">
+                Designed for Storytellers, Educators & Graphic Novel Creators | Academic Defense Edition
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
+

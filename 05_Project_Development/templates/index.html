@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}ComicCraft — Create Your Comic Book{% endblock %}
+
+{% block content %}
+<div class="comic-container">
+
+    <!-- Hero Header Banner -->
+    <div class="hero-banner">
+        <div class="hero-burst-badge">NEW ISSUE!</div>
+        <h1 class="hero-title">TURN YOUR STORY INTO AN ILLUSTRATED COMIC!</h1>
+        <p class="hero-subtitle">
+            Enter your creative narrative prompt below. ComicCraft orchestrates 
+            <strong>Google Gemini Flash</strong> (panel outline), <strong>Gemini Pro</strong> (dialogue & script), 
+            and <strong>Diffusion AI</strong> (illustrations) to publish a full comic strip with printable PDF.
+        </p>
+    </div>
+
+    <!-- Error Alert Display if present -->
+    {% if error_message %}
+    <div class="alert-box alert-danger">
+        <span class="alert-icon">⚠️</span>
+        <div>
+            <strong>Generation Notice:</strong> {{ error_message }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Quick Preset Inspiration Chips -->
+    <div class="presets-section">
+        <span class="presets-label">⚡ Quick Start Presets:</span>
+        <button type="button" class="preset-btn" onclick="applyPreset('superhero')">🦸 Cyberpunk Hero</button>
+        <button type="button" class="preset-btn" onclick="applyPreset('scifi')">🚀 Deep Space Signal</button>
+        <button type="button" class="preset-btn" onclick="applyPreset('steampunk')">⚙️ Victorian Mystery</button>
+        <button type="button" class="preset-btn" onclick="applyPreset('fantasy')">🐉 Dragon Rider</button>
+    </div>
+
+    <!-- Main Creation Form Card -->
+    <div class="comic-card creation-card">
+        <div class="card-header-bar">
+            <span class="card-dot red"></span>
+            <span class="card-dot yellow"></span>
+            <span class="card-dot green"></span>
+            <span class="card-bar-title">STORY ENGINE & PARAMETER SPECIFICATIONS</span>
+        </div>
+
+        <form id="comicForm" action="/generate" method="POST" class="comic-form">
+            
+            <!-- Row 1: Story Idea Textarea -->
+            <div class="form-group full-width">
+                <label for="story_prompt" class="comic-label">
+                    <span class="label-badge">1</span> Story Premise / Creative Narrative Idea:
+                </label>
+                <textarea 
+                    id="story_prompt" 
+                    name="story_prompt" 
+                    rows="3" 
+                    class="comic-input comic-textarea" 
+                    placeholder="e.g. A rogue time traveler accidentally drops a smartphone in ancient Rome, sparking a technological revolution." 
+                    required></textarea>
+                <small class="helper-text">Describe the main conflict, plot goal, or adventure you want to manifest.</small>
+            </div>
+
+            <!-- Row 2: Character Name & Setting -->
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label for="character_name" class="comic-label">
+                        <span class="label-badge">2</span> Main Character / Protagonist:
+                    </label>
+                    <input 
+                        type="text" 
+                        id="character_name" 
+                        name="character_name" 
+                        class="comic-input" 
+                        placeholder="e.g. Max Blaze, Dr. Clara, Cyber-Fox" 
+                        value="Max Blaze" 
+                        required>
+                </div>
+
+                <div class="form-group half-width">
+                    <label for="setting" class="comic-label">
+                        <span class="label-badge">3</span> Setting / World Context:
+                    </label>
+                    <input 
+                        type="text" 
+                        id="setting" 
+                        name="setting" 
+                        class="comic-input" 
+                        placeholder="e.g. Neon Neo-Tokyo, Medieval Kingdom, Mars Colony" 
+                        value="Neon Neo-Tokyo 2099" 
+                        required>
+                </div>
+            </div>
+
+            <!-- Row 3: Tone, Art Style, and Panel Count -->
+            <div class="form-row three-col">
+                <div class="form-group">
+                    <label for="tone" class="comic-label">
+                        <span class="label-badge">4</span> Story Tone / Mood:
+                    </label>
+                    <select id="tone" name="tone" class="comic-select">
+                        <option value="Superhero / Action" selected>💥 Superhero / Action</option>
+                        <option value="Sci-Fi / Cyberpunk">🤖 Sci-Fi / Cyberpunk</option>
+                        <option value="Mystery / Noir">🕵️ Mystery / Noir</option>
+                        <option value="Humorous / Whimsical">🤪 Humorous / Whimsical</option>
+                        <option value="Epic Fantasy">⚔️ Epic Fantasy</option>
+                        <option value="Horror / Thriller">👻 Horror / Thriller</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="art_style" class="comic-label">
+                        <span class="label-badge">5</span> Visual Art Style:
+                    </label>
+                    <select id="art_style" name="art_style" class="comic-select">
+                        <option value="Classic Comic Book" selected>📚 Classic Comic Book (Golden Age)</option>
+                        <option value="Dark Cyberpunk">🌆 Dark Cyberpunk (Neon & Inks)</option>
+                        <option value="Manga / Anime">🎌 Manga / Anime (Monochrome & Speedlines)</option>
+                        <option value="Vintage Pop Art">🎨 Vintage Pop Art (Warhol Halftone)</option>
+                        <option value="Graphic Novel Realism">🖌️ Graphic Novel Realism</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="panel_count" class="comic-label">
+                        <span class="label-badge">6</span> Panels (Standard 5-Arc):
+                    </label>
+                    <select id="panel_count" name="panel_count" class="comic-select">
+                        <option value="5" selected>5 Panels (Complete Dramatic Arc)</option>
+                        <option value="4">4 Panels (Paced Mini-Strip)</option>
+                        <option value="3">3 Panels (Rapid Gag / Concept)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit CTA Button -->
+            <div class="submit-container">
+                <button type="submit" id="generateBtn" class="comic-btn primary-btn submit-btn">
+                    <span class="btn-pow">POW!</span>
+                    <span class="btn-text">GENERATE FULL COMIC STRIP & PDF</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Features & Workflow Highlights -->
+    <div class="workflow-grid">
+        <div class="workflow-card">
+            <div class="wf-step">STEP 1</div>
+            <h3>🧠 Gemini Flash Outline</h3>
+            <p>Decomposes your story into dramatic visual beats, establishing shot compositions and camera perspectives.</p>
+        </div>
+        <div class="workflow-card">
+            <div class="wf-step">STEP 2</div>
+            <h3>💬 Gemini Pro Script</h3>
+            <p>Generates authentic character dialogue, atmospheric narration captions, and classic onomatopoeia.</p>
+        </div>
+        <div class="workflow-card">
+            <div class="wf-step">STEP 3</div>
+            <h3>🎨 Diffusion Panel Art</h3>
+            <p>Renders high-resolution comic illustrations matched to your selected art style and scene descriptions.</p>
+        </div>
+        <div class="workflow-card">
+            <div class="wf-step">STEP 4</div>
+            <h3>📄 FPDF2 Vector Export</h3>
+            <p>Automatically compiles speech bubbles, narration boxes, and panels into a downloadable vector PDF book.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Animated Generation Overlay Modal -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-modal">
+        <div class="loading-spinner-burst">💥</div>
+        <h2 class="loading-title">CRAFTING YOUR COMIC BOOK...</h2>
+        <p class="loading-step-desc" id="loadingStatusText">Orchestrating AI agents and preparing comic canvas...</p>
+        
+        <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="agent-steps">
+            <div class="step-pill" id="step1">1. Gemini Flash Outline ✍️</div>
+            <div class="step-pill" id="step2">2. Gemini Pro Script 💬</div>
+            <div class="step-pill" id="step3">3. Diffusion Art Synthesis 🎨</div>
+            <div class="step-pill" id="step4">4. Vector PDF Compilation 📑</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

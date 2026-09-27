@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Preview: {{ comic.title }} — ComicCraft{% endblock %}
+
+{% block content %}
+<div class="comic-container preview-container">
+
+    <!-- Top Action & Navigation Bar -->
+    <div class="preview-header-bar">
+        <a href="/" class="comic-btn secondary-btn back-btn">
+            ⬅ Create Another Comic
+        </a>
+        <div class="action-btn-group">
+            {% if comic.download_url %}
+            <a href="{{ comic.download_url }}" class="comic-btn action-btn download-direct-btn">
+                📥 Direct PDF Download
+            </a>
+            {% endif %}
+            <a href="/export-success/{{ comic.comic_id }}" class="comic-btn primary-btn export-btn">
+                📄 View PDF Export Page ➔
+            </a>
+        </div>
+    </div>
+
+    <!-- Comic Issue Cover Header -->
+    <div class="comic-issue-banner">
+        <div class="issue-corner-badge">ISSUE #1</div>
+        <div class="issue-info">
+            <h1 class="comic-main-title">{{ comic.title }}</h1>
+            <div class="comic-meta-tags">
+                <span class="meta-tag"><strong>HERO:</strong> {{ comic.character_name }}</span>
+                <span class="meta-tag"><strong>SETTING:</strong> {{ comic.setting }}</span>
+                <span class="meta-tag"><strong>TONE:</strong> {{ comic.tone }}</span>
+                <span class="meta-tag"><strong>STYLE:</strong> {{ comic.art_style }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Comic Panels Flow Grid -->
+    <div class="comic-strip-grid">
+        {% for panel in comic.panels %}
+        <div class="comic-panel-card" id="panel-{{ panel.panel_number }}">
+            
+            <!-- Panel Header -->
+            <div class="panel-meta-header">
+                <span class="panel-number-badge">PANEL {{ panel.panel_number }}</span>
+                <h3 class="panel-title-text">{{ panel.title }}</h3>
+            </div>
+
+            <!-- Narrative Caption Box -->
+            {% if panel.narration %}
+            <div class="panel-caption-box">
+                <span class="caption-label">NARRATION:</span>
+                <p class="caption-text">{{ panel.narration }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Panel Illustration Canvas -->
+            <div class="panel-image-container">
+                {% if panel.image_url %}
+                <img 
+                    src="{{ panel.image_url }}" 
+                    alt="Panel {{ panel.panel_number }} Illustration: {{ panel.title }}" 
+                    class="panel-image"
+                    loading="lazy"
+                >
+                {% else %}
+                <div class="panel-image-placeholder">
+                    <span>Panel Image Processing...</span>
+                </div>
+                {% endif %}
+
+                <!-- Action Sound Effect Badge -->
+                {% if panel.sound_effect %}
+                <div class="sound-effect-burst">
+                    {{ panel.sound_effect }}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Dialogue Speech Balloon -->
+            {% if panel.dialogue %}
+            <div class="speech-balloon">
+                <div class="balloon-content">
+                    <p class="dialogue-text">{{ panel.dialogue }}</p>
+                </div>
+                <div class="balloon-tail"></div>
+            </div>
+            {% endif %}
+
+            <!-- Scene Prompt Inspector Accordion -->
+            <details class="panel-details-fold">
+                <summary class="details-summary">🔍 Scene Prompt & Camera Notes</summary>
+                <div class="details-body">
+                    <p><strong>Scene:</strong> {{ panel.scene_description }}</p>
+                    <p><strong>Diffusion Prompt:</strong> <code>{{ panel.visual_prompt }}</code></p>
+                </div>
+            </details>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bottom Publishing Callout Banner -->
+    <div class="export-callout-banner">
+        <div class="callout-content">
+            <h2>READY TO PRINT OR SHARE YOUR COMIC?</h2>
+            <p>Your comic has been arranged with vector fonts, speech balloons, and metadata into a standardized printable A4 PDF.</p>
+        </div>
+        <div class="callout-actions">
+            <a href="/export-success/{{ comic.comic_id }}" class="comic-btn primary-btn large-btn">
+                <span class="btn-pow">PDF</span>
+                <span>OPEN PDF EXPORT DASHBOARD</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

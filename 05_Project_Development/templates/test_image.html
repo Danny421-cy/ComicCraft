@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Diagnostic: Test Image AI — ComicCraft{% endblock %}
+
+{% block content %}
+<div class="comic-container test-image-container">
+
+    <div class="hero-banner">
+        <h1 class="hero-title">⚡ IMAGE GENERATION DIAGNOSTIC LAB</h1>
+        <p class="hero-subtitle">
+            Directly test the Hugging Face Stable Diffusion pipeline or procedural synthesis engine 
+            with custom visual prompts without running the full comic script pipeline.
+        </p>
+    </div>
+
+    <div class="comic-card test-card">
+        <form id="testImageForm" class="comic-form">
+            <div class="form-group full-width">
+                <label for="testPrompt" class="comic-label">Visual Image Prompt:</label>
+                <textarea 
+                    id="testPrompt" 
+                    name="prompt" 
+                    rows="3" 
+                    class="comic-input comic-textarea"
+                    placeholder="e.g. Cyberpunk detective inspecting a glowing holographic clue in a rainy neon alleyway, cinematic lighting, sharp focus" 
+                    required>Cyberpunk hero standing on neon skyscraper overlooking rainy futuristic city at night</textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label for="testStyle" class="comic-label">Art Style Filter:</label>
+                    <select id="testStyle" name="art_style" class="comic-select">
+                        <option value="Classic Comic Book">Classic Comic Book (Golden Age)</option>
+                        <option value="Dark Cyberpunk" selected>Dark Cyberpunk (Neon & Inks)</option>
+                        <option value="Manga / Anime">Manga / Anime (Speed Lines)</option>
+                        <option value="Vintage Pop Art">Vintage Pop Art (Warhol Halftone)</option>
+                        <option value="Graphic Novel Realism">Graphic Novel Realism</option>
+                    </select>
+                </div>
+                <div class="form-group half-width submit-cell">
+                    <button type="submit" id="testSubmitBtn" class="comic-btn primary-btn test-btn">
+                        <span>🚀 Render Test Image</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Result Box -->
+        <div id="testResultBox" class="test-result-box" style="display: none;">
+            <hr class="comic-divider">
+            <h3 id="resultStatusText">Generated Output:</h3>
+            <p id="resultModeText" class="result-mode-tag"></p>
+            <div class="preview-img-wrapper">
+                <img id="testPreviewImg" src="" alt="Test Image Output" class="test-img-display">
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.getElementById('testImageForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('testSubmitBtn');
+    const resultBox = document.getElementById('testResultBox');
+    const previewImg = document.getElementById('testPreviewImg');
+    const statusText = document.getElementById('resultStatusText');
+    const modeText = document.getElementById('resultModeText');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ Rendering Image...</span>';
+    resultBox.style.display = 'none';
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch('/test-image', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+            previewImg.src = data.image_url + '?t=' + new Date().getTime();
+            statusText.innerText = '✅ Generation Successful!';
+            modeText.innerText = 'Synthesized via: ' + (data.generation_mode || 'Comic Synthesizer');
+            resultBox.style.display = 'block';
+        } else {
+            alert('Image Generation Error: ' + (data.detail || 'Failed'));
+        }
+    } catch (err) {
+        alert('Request Error: ' + err.message);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀 Render Test Image</span>';
+    }
+});
+</script>
+{% endblock %}
+

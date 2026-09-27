@@ -1,0 +1,68 @@
+{
+  "comic_id": "sample_comic_issue_1",
+  "title": "A Cybernetically Enhanced Detective",
+  "character_name": "Cipher Knight",
+  "setting": "Neon Neo-Tokyo, 2099",
+  "tone": "Superhero / Action",
+  "art_style": "Classic Comic Book",
+  "panels": [
+    {
+      "panel_number": 1,
+      "title": "The Calm Before: Cipher Knight",
+      "scene_description": "In Neon Neo-Tokyo, 2099, Cipher Knight - Protagonist patrols the city rooftop as sirens echo in the distance. (A cybernetically enhanced detective defends Neo-Tokyo against an AI crime syndicate that hacked the city power grid.)",
+      "visual_prompt": "Classic Comic Book style, Dramatic wide shot of hero standing atop skyscraper overlooking neon-lit city at dusk, cape fluttering, featuring Cipher Knight in Neon Neo-Tokyo, 2099, dramatic comic illustration, clean comic line art, vibrant palette",
+      "narration": "Deep within the heart of Neon Neo-Tokyo, 2099, destiny begins to stir with quiet anticipation.",
+      "dialogue": "Cipher Knight: \"Something feels different today... the air itself is charged.\"",
+      "sound_effect": "POW!",
+      "image_url": "./sample_panel_1.png",
+      "local_image_path": "..\\08_Project_Demonstration\\03_SAMPLE_OUTPUTS\\sample_panel_1.png"
+    },
+    {
+      "panel_number": 2,
+      "title": "The Threat Emerges",
+      "scene_description": "In Neon Neo-Tokyo, 2099, Cipher Knight - A sudden explosion rocks the high-tech research facility across the river. (A cybernetically enhanced detective defends Neo-Tokyo against an AI crime syndicate that hacked the city power grid.)",
+      "visual_prompt": "Classic Comic Book style, High angle shot of giant smoking crater at tech facility, glowing energy arcs crackling in the air, featuring Cipher Knight in Neon Neo-Tokyo, 2099, dramatic comic illustration, clean comic line art, vibrant palette",
+      "narration": "Without warning, an unexpected rupture shatters the peace of the horizon.",
+      "dialogue": "Cipher Knight: \"Wait, did you see that shadow? It's happening right now!\"",
+      "sound_effect": "KRAKOOM!",
+      "image_url": "./sample_panel_2.png",
+      "local_image_path": "..\\08_Project_Demonstration\\03_SAMPLE_OUTPUTS\\sample_panel_2.png"
+    },
+    {
+      "panel_number": 3,
+      "title": "Rushing to the Scene",
+      "scene_description": "In Neon Neo-Tokyo, 2099, Cipher Knight - Protagonist leaps into action, navigating through narrow alleyways at breakneck speed. (A cybernetically enhanced detective defends Neo-Tokyo against an AI crime syndicate that hacked the city power grid.)",
+      "visual_prompt": "Classic Comic Book style, Dynamic action shot of hero sprinting across rooftops, motion blur, intense focus, featuring Cipher Knight in Neon Neo-Tokyo, 2099, dramatic comic illustration, clean comic line art, vibrant palette",
+      "narration": "Every second ticks away like thunder as danger closes in from all sides.",
+      "dialogue": "Cipher Knight: \"If we don't stop this immediately, Neon Neo-Tokyo, 2099 will never be the same!\"",
+      "sound_effect": "ZAP!",
+      "image_url": "./sample_panel_3.png",
+      "local_image_path": "..\\08_Project_Demonstration\\03_SAMPLE_OUTPUTS\\sample_panel_3.png"
+    },
+    {
+      "panel_number": 4,
+      "title": "The Confrontation",
+      "scene_description": "In Neon Neo-Tokyo, 2099, Cipher Knight - Hero faces off against the villain wielding the stolen experimental core. (A cybernetically enhanced detective defends Neo-Tokyo against an AI crime syndicate that hacked the city power grid.)",
+      "visual_prompt": "Classic Comic Book style, Low angle showdown shot, villain radiating energy while hero raises defense shield, high contrast lighting, featuring Cipher Knight in Neon Neo-Tokyo, 2099, dramatic comic illustration, clean comic line art, vibrant palette",
+      "narration": "The climactic fury peaks in a flash of unbridled resolve and sheer will!",
+      "dialogue": "Cipher Knight: \"Give it everything you've got! There's no turning back!\"",
+      "sound_effect": "WHOOSH!",
+      "image_url": "./sample_panel_4.png",
+      "local_image_path": "..\\08_Project_Demonstration\\03_SAMPLE_OUTPUTS\\sample_panel_4.png"
+    },
+    {
+      "panel_number": 5,
+      "title": "City Saved",
+      "scene_description": "In Neon Neo-Tokyo, 2099, Cipher Knight - Villain is subdued and the core neutralized as dawn breaks over the skyline. (A cybernetically enhanced detective defends Neo-Tokyo against an AI crime syndicate that hacked the city power grid.)",
+      "visual_prompt": "Classic Comic Book style, Hero giving a triumphant thumbs up as morning sunlight breaks through the clouds, citizens cheering in background, featuring Cipher Knight in Neon Neo-Tokyo, 2099, dramatic comic illustration, clean comic line art, vibrant palette",
+      "narration": "Silence falls over Neon Neo-Tokyo, 2099 once more, leaving legends etched forever in ink.",
+      "dialogue": "Cipher Knight: \"Just as planned. Another victory written into history.\"",
+      "sound_effect": "BAM!",
+      "image_url": "./sample_panel_5.png",
+      "local_image_path": "..\\08_Project_Demonstration\\03_SAMPLE_OUTPUTS\\sample_panel_5.png"
+    }
+  ],
+  "created_at": "2026-09-27 00:12:52 UTC",
+  "pdf_path": null,
+  "download_url": null
+}

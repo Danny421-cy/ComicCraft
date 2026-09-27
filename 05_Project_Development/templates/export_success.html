@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Export Complete: {{ title }} — ComicCraft{% endblock %}
+
+{% block content %}
+<div class="comic-container export-container">
+
+    <div class="comic-card export-card">
+        <div class="success-burst-icon">🎉</div>
+        <div class="stamp-badge">READY TO PRINT!</div>
+        
+        <h1 class="export-success-title">COMIC PDF EXPORTED SUCCESSFULLY!</h1>
+        <p class="export-success-desc">
+            Your illustrated comic issue <strong>"{{ title }}"</strong> has been compiled into 
+            a high-resolution vector PDF using the <strong>FPDF2</strong> publishing pipeline.
+        </p>
+
+        <!-- PDF Metadata Card -->
+        <div class="export-meta-box">
+            <div class="meta-row">
+                <span class="meta-label">Document ID:</span>
+                <span class="meta-val"><code>{{ comic_id }}</code></span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">File Format:</span>
+                <span class="meta-val">Adobe PDF (A4 Standard Print)</span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Document Size:</span>
+                <span class="meta-val">{{ file_size }}</span>
+            </div>
+            <div class="meta-row">
+                <span class="meta-label">Layout Architecture:</span>
+                <span class="meta-val">Sequential Panels with Narration & Dialogue</span>
+            </div>
+        </div>
+
+        <!-- Download & Navigation Buttons -->
+        <div class="export-buttons-group">
+            <a href="{{ download_url }}" class="comic-btn primary-btn download-main-btn" download>
+                <span class="btn-pow">📥</span>
+                <span>DOWNLOAD COMIC BOOK (PDF)</span>
+            </a>
+            
+            <a href="/" class="comic-btn secondary-btn create-new-btn">
+                <span>➕ Create Another Comic</span>
+            </a>
+        </div>
+
+        <!-- Printing Tips -->
+        <div class="printing-tips-card">
+            <h4>💡 Printing & Distribution Tips:</h4>
+            <ul>
+                <li><strong>Paper:</strong> For best results, print on glossy or 120gsm heavy paper.</li>
+                <li><strong>Scale:</strong> In your PDF reader printing dialog, select <em>"Fit to Printable Area"</em>.</li>
+                <li><strong>Color:</strong> Choose <em>"High Quality Color"</em> to preserve vibrant halftone patterns.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
